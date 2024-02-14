@@ -7,6 +7,7 @@ import { User } from './modules/users/entities/user.entity';
 import { UserRole } from './modules/users/entities/user-role.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SeederService } from './modules/seeders/seeder/seeder.service';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AppService } from './app.service';
       isGlobal: true,
       load: [configuration],
     }),
+    TypeOrmModule.forFeature([User, UserRole]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -24,10 +26,11 @@ import { AppService } from './app.service';
       database: process.env.DB_NAME,
       entities: [User, UserRole],
       synchronize: true,
+      logging: false,
     }),
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SeederService],
 })
 export class AppModule {}

@@ -1,4 +1,3 @@
-// Import necessary modules and decorators from TypeORM
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,7 +7,6 @@ import {
   BaseEntity,
   BeforeInsert,
   ManyToOne,
-  OneToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserRole } from './user-role.entity';
@@ -40,9 +38,6 @@ export class User extends BaseEntity {
 
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
-
-  // @OneToMany(() => Notification, (notification) => notification.user)
-  // notifications: Notification[];
 
   // Add a BeforeInsert hook to hash the password before insertion
   @BeforeInsert()

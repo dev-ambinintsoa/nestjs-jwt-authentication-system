@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { User } from './user.entity';
 
-@Entity('user_roles')
+@Entity()
 export class UserRole extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,6 +18,9 @@ export class UserRole extends BaseEntity {
   @Column()
   code: string;
 
-  @OneToMany(() => User, (user) => user.role)
+  @Column({ nullable: true })
+  description: string;
+
+  @OneToMany(() => User, (user) => user.role, { onDelete: 'CASCADE' })
   users: User[];
 }
