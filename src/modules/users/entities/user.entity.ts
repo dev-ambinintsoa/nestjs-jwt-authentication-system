@@ -21,14 +21,20 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   username: string;
 
+  @Column({ unique: true })
+  lastName: string;
+
   @Column({ nullable: true })
-  fullName: string;
+  firstName: string;
 
   @Column({ unique: true })
   email: string;
 
   @Column()
   password: string; // Note: Password should be hashed and stored securely
+
+  @Column({ nullable: true })
+  company: string;
 
   @ManyToOne(() => UserRole, (role) => role.users)
   role: UserRole; // Define the relationship with UserRole

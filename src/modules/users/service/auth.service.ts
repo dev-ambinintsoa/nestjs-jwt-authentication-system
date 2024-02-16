@@ -44,7 +44,9 @@ export class AuthService {
 
   async getAuthenticatedUser(userId: number) {
     try {
-      return await this.userService.findById(userId);
+      const user = await this.userService.findById(userId);
+      delete user.password;
+      return user;
     } catch (error) {
       throw new UnauthorizedException(error.message);
     }

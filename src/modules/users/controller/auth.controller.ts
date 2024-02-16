@@ -39,10 +39,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(
-    @Body() loginUserDto: LoginUserDto,
-    @Res({ passthrough: true }) response: Response,
-  ) {
+  async login(@Body() loginUserDto: LoginUserDto, @Res() response: Response) {
     try {
       const user = await this.authService.validateUser(loginUserDto);
       if (!user) {
@@ -65,7 +62,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('authenticated-user')
+  @Get('profile')
   async getAuthenticatedUser(@Req() request: Request) {
     try {
       const userId = request['user'].sub; // Extract user ID from the JWT payload
@@ -76,7 +73,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Post('change-password')
+  @Post('change/password')
   async changePassword(
     @Req() request: Request,
     @Body('oldPassword') oldPassword: string,
@@ -109,7 +106,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Post('logout')
+  @Get('logout')
   async logout(@Req() req: Request, @Res() res: Response) {
     try {
       res.clearCookie('token');

@@ -4,6 +4,7 @@ import {
   IsEmail,
   MinLength,
   MaxLength,
+  IsOptional,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -13,9 +14,17 @@ export class CreateUserDto {
   @MaxLength(30)
   username: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  fullName: string;
+  firstName: string;
+
+  @IsOptional()
+  @IsString()
+  lastName: string;
+
+  @IsOptional()
+  @IsString()
+  company: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -23,6 +32,6 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  @MinLength(8) // Adjust the minimum password length as needed
+  @MinLength(6) // Adjust the minimum password length as needed
   password: string;
 }
