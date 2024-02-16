@@ -16,7 +16,6 @@ import { SeederService } from './modules/seeders/seeder/seeder.service';
       isGlobal: true,
       load: [configuration],
     }),
-    TypeOrmModule.forFeature([User, UserRole]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -28,6 +27,7 @@ import { SeederService } from './modules/seeders/seeder/seeder.service';
       synchronize: true,
       logging: false,
     }),
+    TypeOrmModule.forFeature([UserRole]),
     UsersModule,
   ],
   controllers: [AppController],

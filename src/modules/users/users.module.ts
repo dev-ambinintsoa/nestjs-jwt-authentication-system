@@ -6,11 +6,10 @@ import { User } from './entities/user.entity';
 import { AuthController } from './controller/auth.controller';
 import { AuthService } from './service/auth.service';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { UserRole } from './entities/user-role.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, UserRole]),
+    TypeOrmModule.forFeature([User]),
     JwtModule.register({
       global: true,
       secret: 'test_secret',
